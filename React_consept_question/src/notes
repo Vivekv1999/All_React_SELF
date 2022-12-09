@@ -1,0 +1,61 @@
+<>
+      {
+        localStorage.getItem('admin') ?
+          <div>
+            <div className="header login100">
+              <LinkContainer to="/LoginPage">
+                <a href="#">CompanyLogo</a>
+              </LinkContainer>
+              <div className="header-right">                
+                  <Link to='/LoginPage'>LogIn</Link>
+                <LinkContainer to="/Signin">
+                  <a href>Sign In</a>
+                </LinkContainer>
+                <LinkContainer to="/Signin">
+                  <a href>Sign In</a>
+                </LinkContainer>
+                <a href="#about">crud</a>
+              </div>
+            </div>
+          </div>
+          :
+          (
+          localStorage.getItem('user') ?
+            <>
+              <div>
+                <div className="header login100">
+                  <LinkContainer to="/LoginPage">
+                    <a href="#">CompanyLogo</a>
+                  </LinkContainer>
+                  <div className="header-right">
+                    <LinkContainer to="/LoginPage">
+                      <a href>LogIn</a>
+                    </LinkContainer>
+                    <LinkContainer to="/Signin">
+                      <a href>Sign In</a>
+                    </LinkContainer>
+                    <a href="#about">About</a>
+                    <a href="#about">User</a>
+                  </div>
+                </div>
+              </div>
+            </>
+            :
+            <>
+                <div className="header login100">
+                  <LinkContainer to="/LoginPage">
+                    <a href="'">CompanyLogo</a>
+                  </LinkContainer>
+                  <div className="header-right">
+                    <LinkContainer to="/LoginPage">
+                      <a href>LogIn</a>
+                    </LinkContainer>
+                    <LinkContainer to="/Signin">
+                      <a href>Sign In</a>
+                    </LinkContainer>
+                  </div>
+                </div>
+            </>
+          )
+      }
+    </>

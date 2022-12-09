@@ -1,0 +1,42 @@
+{
+  "user": [
+    {
+      "r_id": 1,
+      "Email": "admin@gmail.com",
+      "Username": "admin",
+      "Password": "a123",
+      "id": 1
+    },
+    {
+      "r_id": 2,
+      "Email": "aos@gmail.com",
+      "Username": "aos",
+      "Password": "123",
+      "id": 2
+    },
+    {
+      "r_id": 2,
+      "Email": "111",
+      "Username": "111q",
+      "Password": "111",
+      "id": 3
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
