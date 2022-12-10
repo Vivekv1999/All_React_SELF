@@ -29,8 +29,8 @@ function App() {
 
       {/* <Checkbox /> */}
       {/* <Check222/> */}
-      {/* <Omrsheet/> */}
-      <Checkget />
+      <Omrsheet/>
+      {/* <Checkget /> */}
 
     </>
   );

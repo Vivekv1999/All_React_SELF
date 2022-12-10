@@ -1,69 +1,118 @@
 import React from 'react'
 import { useState } from 'react'
-import { NavItem } from 'react-bootstrap'
 
 export default function Checkbox() {
-    const [checkkk, setcheckkk] = useState(false)
-    const [neww, setneww] = useState([])
     const emp = [
         {
             no: 1,
-            employee: "aoi",
-            salary: 86
+            employee: "raj",
+            salary: 86345
         },
         {
             no: 2,
-            employee: "fio",
-            salary: 84
+            employee: "jil",
+            salary: 75843
         },
         {
-            no: 1,
-            employee: "kgu",
-            salary: 88
+            no: 3,
+            employee: "roy",
+            salary: 89754
+        },
+        {
+            no: 4,
+            employee: "nil",
+            salary: 98655
+        },
+        {
+            no: 5,
+            employee: "nik",
+            salary: 79854
         }
     ]
 
-    const handlechange = (e) => {
-        console.log(e.target.value,"ppppppp");
-        
-        if (e.target.checked === true) {
-            setneww(e.target.value)
-        }
+    const [checkedsts, setcheedsts] = useState(
+        new Array(emp.length).fill(false)
+    )
+    const [total, settotal] = useState(0)
+
+    ////--//for flter
+    const [inpursearch, setinputsearch] = useState('')
+    const [filtrerdata, setfilterdata] = useState()
+
+    const handlsearch = (e) => {
+        setinputsearch(e.target.value)
+        const filterrr = emp.filter((item) => {
+            return Object.values(item).join('').toLowerCase().includes(inpursearch.toLowerCase())
+        })
+        setfilterdata(filterrr)
     }
 
+
+    const handlechange = (position) => {
+        const updatechechstatus = checkedsts.map((item, index) =>
+            index === position ? !item : item
+        )
+        setcheedsts(updatechechstatus)
+
+        const totalprice = updatechechstatus.reduce((sum, currentele, index) => {
+            {
+                if (currentele === true)
+                    return sum + emp[index].salary
+            }
+            return sum
+        }, 0)
+
+        settotal(totalprice)
+    }
 
 
     return (
         <>
-            <div className="col-6 d-flex justify-content-center">
-
+            <div className="col-6 ">
+                <div className="container">
+                    <input type="search" value={inpursearch} onChange={(e) => handlsearch(e)} />
+                </div>
                 <table className='table'>
                     <thead>
                         <tr>
-                            <th>no</th>
-                            <th>employe</th>
-                            <th>number</th>
+                            <th>No</th>
+                            <th>Employe</th>
+                            <th>Number</th>
+                            <th>Tik</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {emp.map((item) => {
-                            return <tr>
-                                <th>{item.no}</th>
-                                <th>{item.employee}</th>
-                                <th>{item.salary}</th>
-                                <th>
-                                    {/* <input type="checkbox" value={item.salary} onClick={(e)=>{handlechange(e) }}/> */}
-                                    <div onClick={(e) => { handlechange(e) }}>
-                                        <input type="checkbox" value={item.salary} />
-                                    </div>
-                                </th>
-                            </tr>
-                        })}
+                        {inpursearch.length > 1 ?
+                            filtrerdata && filtrerdata.map((item, index) => {
+                                return <tr>
+                                    <th>{item.no}</th>
+                                    <th>{item.employee}</th>
+                                    <th>{item.salary} ₹</th>
+                                    <th>
+                                        <input type="checkbox" name={item.name} value={item.value}
+                                            checked={checkedsts[index]} onClick={() => handlechange(index)} />
+                                    </th>
+                                </tr>
+                            })
+                            :
+
+                            emp.map((item, index) => {
+                                return <tr>
+                                    <th>{item.no}</th>
+                                    <th>{item.employee}</th>
+                                    <th>{item.salary} ₹</th>
+                                    <th>
+                                        <input type="checkbox" name={item.name} value={item.value}
+                                            checked={checkedsts[index]} onClick={() => handlechange(index)} />
+                                    </th>
+                                </tr>
+                            })
+                        }
                     </tbody>
                 </table>
             </div>
             <h3>
-                total Sum: {neww}
+                total Sum: {total} ₹
             </h3>
         </>
     )
