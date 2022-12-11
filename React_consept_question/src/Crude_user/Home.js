@@ -21,7 +21,7 @@ export default function Home(props) {
     }
 
     return (
-        <div className='col-6'>
+        <div className='col-6 m-auto' style={{margin:"auto"}}>
             <table className='table table-striped'>
                 <thead>
                     <tr>

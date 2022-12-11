@@ -1,24 +1,39 @@
 import React from 'react'
+import { useEffect } from 'react'
 import { useState } from 'react'
+import { ButtonToolbar } from 'react-bootstrap'
 
 export default function Omrsheet() {
-    const student = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+    const student = [1, 2, 3]
 
     const [newomr, setnewomr] = useState(
-        new Array(student.length * 2).fill(null)
+        new Array(student.length * 2).fill({ name: null, val: null })
     )
-    const [upadtecheck, setupadtecheck] = useState()
-    // console.log(newomr)
+    const [answer, setanswer] = useState([])
 
+    const [bnb, setbnb] = useState([])
 
+    console.log(answer, "onchnage")
     const handlechange = (position, e) => {
-        const upadtecheck = newomr.map((item, index) =>
-            index === position ? item = e.target.value : null
-        )
-        setupadtecheck(upadtecheck)
-        setnewomr(upadtecheck)
+        // const name = "ind"
+        const name = e.target.name
+        const val = e.target.value
+        setanswer({ ...answer, [name]: val })
+
+        // const ccc = e.target.value
+        // const ddd = ccc.split("")
+        // const eee = ddd[0] + ddd[1]
+        // bnb.push(ccc)
     }
-    console.log(newomr, "detail...")
+
+
+    const [allanswer, setallanswer] = useState([])
+    const handlesubmit = () => {
+        const bb = []
+        bb.push(answer)
+        setallanswer(bb)
+    }
+    console.log(allanswer, "uhlk");
 
     return (
         <>
@@ -74,14 +89,16 @@ export default function Omrsheet() {
                                     <label style={{ marginLeft: "34px" }}>D</label>
                                 </div>
                                 {student && student.map((itm, index) => {
+                                    console.log(itm, "ppppppp");
+
 
                                     return <>
                                         <label style={{ marginRight: "13px", width: "35px", border: "2px solid grey" }}>{index + 26}</label>
                                         <span onClick={(e) => handlechange(index, e)} >
-                                            <input type="radio" name={index + 26} value={index + 26 + "A"} className='mx-3' />
-                                            <input type="radio" name={index + 26} value={index + 26 + "B"} className='mx-3' />
-                                            <input type="radio" name={index + 26} value={index + 26 + "C"} className='mx-3' />
-                                            <input type="radio" name={index + 26} value={index + 26 + "D"} className='mx-3' />
+                                            <input type="radio" name={"name" + index + 26} value={index + 26 + "A ,"} className='mx-3' />
+                                            <input type="radio" name={"name" + index + 26} value={index + 26 + "B ,"} className='mx-3' />
+                                            <input type="radio" name={"name" + index + 26} value={index + 26 + "C ,"} className='mx-3' />
+                                            <input type="radio" name={"name" + index + 26} value={index + 26 + "D ,"} className='mx-3' />
                                         </span>
 
                                         <br />
@@ -94,10 +111,21 @@ export default function Omrsheet() {
                 </div>
             </div>
 
+            <button onClick={handlesubmit}>submit</button>
             <div className="container my-4">
                 <p className='col-7'>
-                    Your Answer
-                    {/* {newomr} */}
+                    Your Answer :
+                    {allanswer && allanswer.map((ii, index) => {
+                        console.log(ii, "allllanaswer below");
+
+                        return <>
+                            <div className='mx-2' style={{marginRight:"20px"}}>
+                                <span>{Object.values(ii)}</span></div>
+                        </>
+
+
+
+                    })}
                 </p>
             </div>
 

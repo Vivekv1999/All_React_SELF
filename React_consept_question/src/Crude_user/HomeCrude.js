@@ -10,7 +10,7 @@ export default function HomeCrude() {
     
 
     return (
-        <div>
+        <div style={{margin:"auto"}}>
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Home/>} />

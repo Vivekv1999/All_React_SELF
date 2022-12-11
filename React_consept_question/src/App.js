@@ -11,6 +11,7 @@ import Checkbox from './Extra-QUESTION/Checkbox';
 import Check222 from './Extra-QUESTION/Che222';
 import Omrsheet from './Extra-QUESTION/Omrsheet';
 import Checkget from './Extra-QUESTION/Checkboss/Checkget';
+import Pagnation from './Extra-QUESTION/pagenation/Pagnation';
 
 
 
@@ -22,7 +23,8 @@ function App() {
       {/* <Pure_component/> */}
       {/* <Higer_order_component/> */}
       {/* <Homelazy /> */}
-      {/* <HomeCrude />                               CRUDEUSER */}
+      {/* <HomeCrude />                                */}
+                                                {/*///////////////////////*CRUDEUSER */}
 
       {/* <Stylecomp/> */}
       {/* <Style22/> */}
@@ -31,6 +33,8 @@ function App() {
       {/* <Check222/> */}
       <Omrsheet/>
       {/* <Checkget /> */}
+
+      {/* <Pagnation/> */}
 
     </>
   );

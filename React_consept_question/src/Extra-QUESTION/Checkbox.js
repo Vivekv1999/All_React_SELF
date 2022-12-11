@@ -95,7 +95,6 @@ export default function Checkbox() {
                                 </tr>
                             })
                             :
-
                             emp.map((item, index) => {
                                 return <tr>
                                     <th>{item.no}</th>
