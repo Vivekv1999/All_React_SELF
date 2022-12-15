@@ -13,9 +13,14 @@ export default function Add() {
     const handleadd = (e) => {
         e.preventDefault()
 
-        const ids = uuid().slice(0,5)
-        // const uniqueid = ids.slice(0,5)
-console.log(ids);
+
+        const asd=Employees[Employees.length-1]
+        const newid=parseInt(asd.id)+1      ///id ave te string 6 atle number ma conver kari and +1 kariii
+        const ids=newid.toString()      ///id avi tene pa6u string macovert karava mate nakarpa6u number ma hoy to barabar avati nathi
+
+
+        // const ids = uuid().slice(0,5)                  //&&&&//second method--import uuid karvu pde 
+        // console.log(ids);
 
 
         Employees.push({ id: ids, Name: namee, Age: age })
