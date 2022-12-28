@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { ButtonToolbar } from 'react-bootstrap'
+import { object } from 'yup'
 
 const student = [1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5]
 export default function Omrsheet() {
@@ -17,6 +18,8 @@ export default function Omrsheet() {
         const val = e.target.value
         setanswer({ ...answer, [name]: val })
     }
+
+    console.log(answer);
 
 
     const [allanswer, setallanswer] = useState([])
@@ -99,6 +102,7 @@ export default function Omrsheet() {
             <div className="container my-4">
                 <p className='col-7'>
                     Your Answer :
+
                     {allanswer && allanswer.map((ii, index) => {
                         // console.log(ii, "allllanaswer below");
                         return <>
@@ -106,6 +110,11 @@ export default function Omrsheet() {
                                 <span>{Object.values(ii)}</span></div>
                         </>
                     })}
+
+                    <h4>we get right answer above and below also--this isin console in right now</h4>
+                    {console.log(Object.entries(answer).map((it1) => {
+                        return it1[1]
+                    }))}
                 </p>
             </div>
         </>

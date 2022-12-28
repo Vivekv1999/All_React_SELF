@@ -19,6 +19,12 @@ import Incorectstate from './Hooks/Useeffectt/Incorectstate';
 import Returnuseee from './Hooks/Useeffectt/Returnuseee';
 import Apidatafetchuse from './Hooks/Useeffectt/Apidatstop/Apidatafetchuse';
 import Main from './Hooks/Useeffectt/Apidatstop/Main';
+import Usememoo from './Hooks/Usememofatsrapp.js/Usememoo';
+import Signup from './VALIDATION-formik-yup/Signup';
+import Homeaxios from './Axios-crude/Homeaxios';
+import AgeCalculator from './Age-calculator/Age_classcomp';
+import Useref_hook from './Hooks/Useref/Useref_hook';
+import Effect_vs_layout from './Hooks/Vs/Effect_vs_layout';
 
 
 
@@ -28,7 +34,7 @@ function App() {
 
       {/* <Apidata/> */}
       {/* <Pure_component/> */}
-      {/* <Higer_order_component/> */}
+      <Higer_order_component/>
       {/* <Homelazy/> */}
       {/* <HomeCrude />                                */}
                                                 {/*///////////////////////*CRUDEUSER */}
@@ -48,8 +54,16 @@ function App() {
 
       {/* <Incorectstate/> */}
       {/* <Returnuseee/> */}
-      <Main/> 
+      {/* <Main/>  */}
                 {/* useefettct ma api fetch rokjava */}
+
+      {/* <Usememoo/> */}
+      {/* <Signup/> */}
+      {/* <Homeaxios/> */}
+      {/* <AgeCalculator/> */}
+
+      {/* <Useref_hook/> */}
+      {/* <Effect_vs_layout/> */}
 
     </>
   );

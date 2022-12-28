@@ -43,7 +43,7 @@ export default function Home(props) {
                                     <Button onClick={() => { handleedit(item.id, item.Name, item.Age) }}>Edit</Button>
                                 </Link>
                                 &nbsp;
-                                <Button onClick={() => { handledelete(item.id) }}>Delet</Button>
+                                <Button onClick={() => { handledelete(item.id) }}>Delete</Button>
                             </th>
 
                         </tr>

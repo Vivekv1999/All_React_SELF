@@ -52,9 +52,7 @@ export default function Apidatafetchuse() {
         fetch("https://dummyjson.com/users",{signal})
             .then(res => res.json())
             .then(ddd => {
-
                     alert("Still datai fetching")
-
                     setdata(ddd)
                     console.log(ddd.users)
             }

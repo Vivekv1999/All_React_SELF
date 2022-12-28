@@ -16,7 +16,7 @@ export default function Incorectstate() {
             setnum(pre=>pre+1)
         }, 1000);
     },[])
-    // },[number])      //1 aa raku tu
+    // },[num])      //1 aa raku tu
   return (
     <div>
     <h1>{num}</h1>

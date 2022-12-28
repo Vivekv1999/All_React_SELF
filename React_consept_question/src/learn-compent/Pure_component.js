@@ -1,4 +1,4 @@
-// shouldcomponent upadet==========> like 
+   // shouldcomponent upadet==========> like 
 import React, { Component,PureComponent } from 'react'
 
 export default class Pure_component extends PureComponent { //purecomponet ni jagaye coponent laki joy leje

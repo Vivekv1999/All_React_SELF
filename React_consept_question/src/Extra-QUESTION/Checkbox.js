@@ -34,7 +34,7 @@ export default function Checkbox() {
         new Array(emp.length).fill(false)
     )
     const [total, settotal] = useState(0)
-
+    
     ////--//for flter
     const [inpursearch, setinputsearch] = useState('')
     const [filtrerdata, setfilterdata] = useState()

@@ -12,12 +12,10 @@ export default function UseCallbackkk() {
 return (
     <>
         <div className="container">
-
             <ChildA learning={learning} />    {/*/refrential equality ne lidhe re-create thase lering functiona and te ne lidhe childA cmponent rerefdr thase */}
             <h1>count: {count} </h1>
             <button onClick={() => setcount(count + 1)} >Click</button>
         </div>
-
     </>
 )
 }

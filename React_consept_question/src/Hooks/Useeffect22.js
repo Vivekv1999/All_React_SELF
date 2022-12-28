@@ -10,10 +10,11 @@ export default function Useeffect22() {
     const [width, setwidth] = useState(window.screen.width)
 
     useEffect(() => {
+        console.log("add event");
         window.addEventListener("resize",actulwidth)
-        setwidth(window.screen.width)
-        
+         
         return ()=>{
+            console.log("remove event");
             window.removeEventListener("resize",actulwidth)
         }
     })
