@@ -21,7 +21,7 @@ export default function Returnuseee() {
         }
     }, [])
 
-    ////not done by lama but doen by me -----this tric also stop ememroy leak//second method ==pre=>pre+1 sivay ni
+    ////not done by lama but doen by me -----this stric also stop ememroy leak//second method ==pre=>pre+1 sivay ni
     // useEffect(() => {
     //     console.log('ahiy ajota khavbar pade ke var  varm run thay 6');
 

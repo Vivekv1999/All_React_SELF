@@ -15,6 +15,7 @@ export default function Pagnation() {
     const lastpostindex = currentpage * postperpage
     const firpostindex = lastpostindex - postperpage
 
+    
     const currentpost = arr.slice(firpostindex, lastpostindex)
 
 

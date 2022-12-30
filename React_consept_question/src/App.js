@@ -25,6 +25,7 @@ import Homeaxios from './Axios-crude/Homeaxios';
 import AgeCalculator from './Age-calculator/Age_classcomp';
 import Useref_hook from './Hooks/Useref/Useref_hook';
 import Effect_vs_layout from './Hooks/Vs/Effect_vs_layout';
+import Csv_upload_split from './Extra-QUESTION/CSV_VETRON/Csv_upload_split';
 
 
 
@@ -34,7 +35,7 @@ function App() {
 
       {/* <Apidata/> */}
       {/* <Pure_component/> */}
-      <Higer_order_component/>
+      {/* <Higer_order_component/> */}
       {/* <Homelazy/> */}
       {/* <HomeCrude />                                */}
                                                 {/*///////////////////////*CRUDEUSER */}
@@ -65,6 +66,7 @@ function App() {
       {/* <Useref_hook/> */}
       {/* <Effect_vs_layout/> */}
 
+<Csv_upload_split/>
     </>
   );
 }
