@@ -1,0 +1,16 @@
+.progress_container{
+    width: 350px;
+    height: 13px;
+    border-radius: 10px;
+    border: 1px solid green;
+    position: relative;
+    overflow: hidden;      /**key*/
+}
+
+.progress_inner_container{
+    position: absolute;
+    background-color: green;
+    height: 100%;
+    width:100%;
+    /* transform: translateX(-100%) */  /**key*/
+}

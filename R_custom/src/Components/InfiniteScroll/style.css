@@ -1,0 +1,22 @@
+.imagecontainer{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+    gap: 3px;
+
+    height: 550px;
+    width: 500px;
+    border: 2px solid lightblue;
+    overflow: auto;
+}
+
+.image_view{
+    object-fit: contain;
+    /* object-fit: cover; */
+}
+/* 
+::-webkit-scrollbar{
+    width: 5px;
+    height: 3px;
+} */
