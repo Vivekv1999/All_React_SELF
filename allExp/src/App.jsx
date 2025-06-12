@@ -1,6 +1,7 @@
 // import ManualCropPdf from "./Page/CropPdf/ManualCropPdf"
 import AutoCropPdf from "./Page/CropPdf/AutoCropPdf";
 import MergePDF from "./Page/MergePDF/MergePDF"
+import RemovePagePdf from "./Page/RemovePagePdf/RemovePagePdf";
 function App() {
 
   return (
@@ -8,7 +9,8 @@ function App() {
       {/* <AutoCropPdf /> */}
       {/* //-----crop pdf---- */}
       {/* <ManualCropPdf /> */}
-      <MergePDF />
+      {/* <MergePDF /> */}
+      <RemovePagePdf />
     </>
   );
 }
