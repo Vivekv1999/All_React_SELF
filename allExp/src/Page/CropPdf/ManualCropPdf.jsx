@@ -6,12 +6,20 @@ import { useEffect, useRef, useState } from 'react';
 // Set PDF.js worker source (matching pdfjs-dist@4.10.38)
 pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs`;
 
+const ME1 = {
+    height: 418,
+    width: 595,
+    x: 0,
+    y: 0
+}
+
 const PdfCropper = () => {
     const [pdfDoc, setPdfDoc] = useState(null);
     const [pdfFile, setPdfFile] = useState(null);
     const [pageNum, setPageNum] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
-    const [cropBox, setCropBox] = useState({ x: 50, y: 50, width: 100, height: 100 });
+    const [cropBox, setCropBox] = useState(ME1 || { x: 50, y: 50, width: 100, height: 100 });
+
     const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
     const canvasRef = useRef(null);
     const cropBoxRef = useRef(null);
@@ -51,12 +59,12 @@ const PdfCropper = () => {
             const context = canvas.getContext('2d');
             await page.render({ canvasContext: context, viewport }).promise;
 
-            setCropBox({
-                x: 50,
-                y: 50,
-                width: Math.min(400, viewport.width - 50),
-                height: Math.min(100, viewport.height - 50),
-            });
+            // setCropBox({
+            //     x: 50,
+            //     y: 50,
+            //     width: Math.min(400, viewport.width - 50),
+            //     height: Math.min(100, viewport.height - 50),
+            // });
         } catch (error) {
             console.error('Error rendering page:', error);
         }
