@@ -137,39 +137,53 @@ const RemovePagePdf = () => {
         <div className="max-w-6xl mx-auto p-4">
             <h1 className="text-2xl font-bold mb-6">Remove Page From PDFs</h1>
 
-            <label className="flex items-center justify-center w-full h-32 px-4 transition bg-white border-2 border-gray-300 border-dashed rounded-md cursor-pointer hover:border-indigo-500">
-                <span className="text-gray-600">Click or drop PDFs here to select</span>
-                <input
-                    type="file"
-                    multiple
-                    accept="application/pdf"
-                    onChange={handleFileChange}
-                    className="hidden"
-                />
-            </label>
-
-            <div className="my-6 space-y-2">
-                <p className="font-medium">Pages</p>
-                <label className="flex items-center gap-2">
-                    <input type="radio" name="pages" value="all" checked={removeOption === "all"} onChange={() => setRemoveOption("all")} /> All
-                </label>
-                <label className="flex items-center gap-2">
-                    <input type="radio" name="pages" value="odd" checked={removeOption === "odd"} onChange={() => setRemoveOption("odd")} /> Odd pages only
-                </label>
-                <label className="flex items-center gap-2">
-                    <input type="radio" name="pages" value="even" checked={removeOption === "even"} onChange={() => setRemoveOption("even")} /> Even pages only
-                </label>
-                <label className="flex items-center gap-2">
-                    <input type="radio" name="pages" value="custom" checked={removeOption === "custom"} onChange={() => setRemoveOption("custom")} />
+            <div
+                onDragOver={(e) => e.preventDefault()}
+                onDrop={(e) => {
+                    e.preventDefault();
+                    const files = Array.from(e.dataTransfer.files).filter(f => f.type === "application/pdf");
+                    const fakeEvent = { target: { files } };
+                    handleFileChange(fakeEvent);
+                }}
+                className="flex items-center justify-center w-full h-32 px-4 transition bg-white border-2 border-gray-300 border-dashed rounded-md cursor-pointer hover:border-indigo-500"
+            >
+                <label className="text-gray-600 cursor-pointer">
+                    Click or drop PDFs here to select
                     <input
-                        type="text"
-                        placeholder="e.g. 1-5, 8, 11-13"
-                        className="border rounded px-2 py-1 text-sm"
-                        value={customPages}
-                        onChange={(e) => setCustomPages(e.target.value)}
+                        type="file"
+                        multiple
+                        accept="application/pdf"
+                        onChange={handleFileChange}
+                        className="hidden"
                     />
                 </label>
             </div>
+
+
+            {pdfs.length > 0 &&
+                <div className="my-6 space-y-2">
+                    <p className="font-medium">Pages</p>
+                    <label className="flex items-center gap-2">
+                        <input type="radio" name="pages" value="all" checked={removeOption === "all"} onChange={() => setRemoveOption("all")} /> All
+                    </label>
+                    <label className="flex items-center gap-2">
+                        <input type="radio" name="pages" value="odd" checked={removeOption === "odd"} onChange={() => setRemoveOption("odd")} /> Odd pages only
+                    </label>
+                    <label className="flex items-center gap-2">
+                        <input type="radio" name="pages" value="even" checked={removeOption === "even"} onChange={() => setRemoveOption("even")} /> Even pages only
+                    </label>
+                    <label className="flex items-center gap-2">
+                        <input type="radio" name="pages" value="custom" checked={removeOption === "custom"} onChange={() => setRemoveOption("custom")} />
+                        <input
+                            type="text"
+                            placeholder="e.g. 1-5, 8, 11-13"
+                            className="border rounded px-2 py-1 text-sm"
+                            value={customPages}
+                            onChange={(e) => setCustomPages(e.target.value)}
+                        />
+                    </label>
+                </div>
+            }
 
             {pdfs.length > 0 && (
                 <>
