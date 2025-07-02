@@ -13,6 +13,33 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs
 
 const MergePDF = () => {
     const [pdfs, setPdfs] = useState([]);
+    const [isDragging, setIsDragging] = useState(false);
+
+    const handleDragOver = (e) => {
+        e.preventDefault();
+        setIsDragging(true);
+    };
+
+    const handleDragLeave = () => {
+        setIsDragging(false);
+    };
+
+    const handleDrop = (e) => {
+        e.preventDefault();
+        setIsDragging(false);
+        const files = Array.from(e.dataTransfer.files).filter(
+            (file) => file.type === "application/pdf"
+        );
+        if (files.length > 0) {
+            const fakeEvent = { target: { files } };
+            handleFileChange(fakeEvent);
+        }
+    };
+
+    const removePdf = (id) => {
+        console.log(id, "pppppppppppp");
+        setPdfs((prev) => prev.filter((pdf) => pdf.id !== id));
+    };
 
     const loadPdfMeta = async (file) => {
         const bytes = await file.arrayBuffer();
@@ -93,16 +120,30 @@ const MergePDF = () => {
         <div className="max-w-6xl mx-auto p-4">
             <h1 className="text-2xl font-bold mb-6">Merge PDFs</h1>
 
-            <label className="flex items-center justify-center w-full h-32 px-4 transition bg-white border-2 border-gray-300 border-dashed rounded-md cursor-pointer hover:border-indigo-500">
-                <span className="text-gray-600">Click or drop PDFs here to select</span>
+            <div
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={handleDrop}
+                onClick={() => document.getElementById("pdf-upload").click()}
+                className={`flex items-center justify-center w-full h-32 px-4 transition border-2 border-dashed rounded-md cursor-pointer
+                ${isDragging
+                        ? "bg-indigo-50 border-indigo-500 scale-105 shadow-lg"
+                        : "bg-white border-gray-300"
+                    }`}
+            >
+                <span className="text-gray-600">
+                    {isDragging ? "Drop your PDFs here 📄" : "Click or drop PDFs here to select"}
+                </span>
                 <input
+                    id="pdf-upload"
                     type="file"
                     multiple
                     accept="application/pdf"
                     onChange={handleFileChange}
                     className="hidden"
                 />
-            </label>
+            </div>
+
 
             {pdfs.length > 0 && (
                 <>
@@ -121,8 +162,18 @@ const MergePDF = () => {
                                                     ref={provided.innerRef}
                                                     {...provided.draggableProps}
                                                     {...provided.dragHandleProps}
-                                                    className="group border rounded-xl shadow p-2 bg-white hover:bg-gray-50 transition"
+                                                    className="group border relative rounded-xl shadow p-2 bg-white hover:bg-gray-50 transition min-w-[200px]"
                                                 >
+                                                    <button
+                                                        onClick={() => removePdf(pdf.id)}
+                                                        className="absolute top-1.5 right-1.5 p-1 bg-white/80 hover:bg-red-500 hover:text-white text-gray-600 rounded-full shadow-md transition-colors z-10"
+                                                        title="Remove PDF"
+                                                    >
+                                                        <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                                        </svg>
+                                                    </button>
+
                                                     <div className="relative">
                                                         {pdf.preview && (
                                                             <img
@@ -135,12 +186,8 @@ const MergePDF = () => {
                                                             {String(index + 1).padStart(2, "0")}
                                                         </span>
                                                     </div>
-                                                    <p className="text-xs text-gray-800 truncate mb-1">
-                                                        {pdf.file.name}
-                                                    </p>
-                                                    <p className="text-xs text-gray-500">
-                                                        {pdf.pageCount} page{pdf.pageCount > 1 ? "s" : ""}
-                                                    </p>
+                                                    <p className="text-xs text-gray-800 truncate mb-1">{pdf.file.name}</p>
+                                                    <p className="text-xs text-gray-500">{pdf.pageCount} page{pdf.pageCount > 1 ? "s" : ""}</p>
                                                 </div>
                                             )}
                                         </Draggable>
