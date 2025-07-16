@@ -11,7 +11,10 @@ import {
 import * as pdfjsLib from "pdfjs-dist";
 pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs`;
 
-const MergePDF = () => {
+const MergePDF = ({
+    setMergedFile, //for auto crop pdf after merge
+    isMeregWithCrop
+}) => {
     const [pdfs, setPdfs] = useState([]);
     const [isDragging, setIsDragging] = useState(false);
 
@@ -98,27 +101,55 @@ const MergePDF = () => {
         setPdfs(reordered);
     };
 
-    const mergePdfs = async () => {
-        if (pdfs.length === 0) return;
-        const merged = await PDFDocument.create();
-        for (const pdf of pdfs) {
-            const srcDoc = await PDFDocument.load(pdf.bytes);
-            const copied = await merged.copyPages(srcDoc, srcDoc.getPageIndices());
-            copied.forEach((page) => merged.addPage(page));
+    const buildMergedPdfFile = async (pdfArr) => {
+        if (!pdfArr.length) return null;
+
+        const mergedDoc = await PDFDocument.create();
+
+        for (const item of pdfArr) {
+            const srcDoc = await PDFDocument.load(item.bytes);   // bytes you cached earlier
+            const copiedPages = await mergedDoc.copyPages(srcDoc, srcDoc.getPageIndices());
+            copiedPages.forEach(p => mergedDoc.addPage(p));
         }
-        const mergedBytes = await merged.save();
-        const blob = new Blob([mergedBytes], { type: "application/pdf" });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = "merged.pdf";
-        link.click();
-        URL.revokeObjectURL(url);
+
+        const mergedBytes = await mergedDoc.save();            // Uint8Array
+        return new File([mergedBytes], "merged.pdf", { type: "application/pdf" });
+    };
+
+    const mergePdfs = async () => {
+        if (setMergedFile) {//for mereg and both crop functionality
+            const mergedFile = await buildMergedPdfFile(pdfs);
+            setMergedFile(mergedFile)
+        }
+
+        else {
+            if (pdfs.length === 0) return;
+            const merged = await PDFDocument.create();
+
+            for (const pdf of pdfs) {
+                const srcDoc = await PDFDocument.load(pdf.bytes);
+                const copied = await merged.copyPages(srcDoc, srcDoc.getPageIndices());
+                copied.forEach((page) => merged.addPage(page));
+            }
+            const mergedBytes = await merged.save();
+            const blob = new Blob([mergedBytes], { type: "application/pdf" });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = "merged.pdf";
+            link.click();
+
+            console.log(url, "merged---url---mergedBytes", mergedBytes, link?.target?.file?.[0]);
+
+            URL.revokeObjectURL(url);
+        }
     };
 
     return (
         <div className="max-w-6xl mx-auto p-4">
-            <h1 className="text-2xl font-bold mb-6">Merge PDFs</h1>
+            <h1 className="text-2xl font-bold mb-6">
+                {isMeregWithCrop ? "Merge with crop" : "Merge PDFs"}
+            </h1>
 
             <div
                 onDragOver={handleDragOver}

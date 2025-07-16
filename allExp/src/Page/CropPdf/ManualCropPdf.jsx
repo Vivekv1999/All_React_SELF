@@ -1,19 +1,22 @@
 import interact from 'interactjs';
 import { PDFDocument } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
-import { useEffect, useRef, useState } from 'react';
+import { use, useEffect, useRef, useState } from 'react';
 
 // Set PDF.js worker source (matching pdfjs-dist@4.10.38)
 pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs`;
 
 const ME1 = {
-    height: 418,
+    height: 460,
     width: 595,
     x: 0,
     y: 0
 }
 
-const PdfCropper = () => {
+const PdfCropper = ({
+    mergedFile,
+    setMergedFile
+}) => {
     const [pdfDoc, setPdfDoc] = useState(null);
     const [pdfFile, setPdfFile] = useState(null);
     const [pageNum, setPageNum] = useState(1);
@@ -24,9 +27,33 @@ const PdfCropper = () => {
     const canvasRef = useRef(null);
     const cropBoxRef = useRef(null);
 
+
+    useEffect(() => {
+        if (mergedFile) {
+            handleFileChange(mergedFile)
+            console.log("filte excess11111111111", mergedFile);
+        }
+    }, [mergedFile])
+
+    useEffect(() => {
+        if (pdfDoc && mergedFile) {
+            console.log("crop file2222222222");
+            cropPDF()
+            setMergedFile(null)
+        }
+
+    }, [mergedFile, pdfDoc])
+
     // Handle PDF upload
     const handleFileChange = async (e) => {
-        const file = e.target.files[0];
+        let file
+
+        if (mergedFile) { //for mereged pdf crop
+            file = e;
+        } else {
+            file = e.target.files[0];
+        }
+
         if (!file) return;
 
         try {
