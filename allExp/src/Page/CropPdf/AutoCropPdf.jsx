@@ -1,7 +1,7 @@
 import { PDFDocument } from 'pdf-lib';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-const AutoCropPdf = () => {
+const AutoCropPdf = ({ mergedFile }) => {
     const [pdfDoc, setPdfDoc] = useState(null);
     const [pageSize, setPageSize] = useState(null);
     const [error, setError] = useState('');
@@ -14,7 +14,8 @@ const AutoCropPdf = () => {
     });
 
     const handleFileChange = async (e) => {
-        const file = e.target.files[0];
+        const file = e
+        // const file = e.target.files[0];
         if (!file || !file.type.includes('pdf')) {
             setError('Please upload a valid PDF file.');
             return;
